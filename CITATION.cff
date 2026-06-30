@@ -13,7 +13,17 @@ type: software
 authors:
   - given-names: "Arthur Freitas"
     family-names: "Ramos"
+    affiliation: "Microsoft Corporation"
+    orcid: "https://orcid.org/0009-0003-3568-0325"
     alias: "Arthur742Ramos"
+  - given-names: "David Barros"
+    family-names: "Hulak"
+    affiliation: "Independent Researcher"
+    orcid: "https://orcid.org/0009-0002-8056-1774"
+  - given-names: "Ruy J. G. B."
+    family-names: "de Queiroz"
+    affiliation: "Centro de Informática, Universidade Federal de Pernambuco"
+    orcid: "https://orcid.org/0000-0003-1482-0977"
 repository-code: "https://github.com/Arthur742Ramos/bmssp-nonvacuous-runtime"
 url: "https://github.com/Arthur742Ramos/bmssp-nonvacuous-runtime"
 license: BSD-3-Clause
