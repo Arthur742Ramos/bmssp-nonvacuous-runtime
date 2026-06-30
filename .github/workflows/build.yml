@@ -56,5 +56,13 @@ jobs:
           restore-keys: |
             isabelle-heaps-${{ env.ISABELLE_VERSION }}-
 
-      - name: Build session (proofs, no document)
-        run: isabelle build -o document=false -D .
+      - name: Build session (proofs; PDF disabled for CI)
+        run: |
+          # The committed ROOT requests a PDF (document = pdf). Building it needs a
+          # LaTeX/lualatex toolchain; CI verifies the *proofs* (the kernel checks),
+          # not the typesetting. A session-level ROOT option overrides the
+          # command-line `-o document=false`, so we neutralise it in the ephemeral
+          # runner checkout only. Local users still build the PDF with
+          # `isabelle build -D .` against the unmodified ROOT.
+          sed -i 's/document = pdf/document = false/' ROOT
+          isabelle build -D .
