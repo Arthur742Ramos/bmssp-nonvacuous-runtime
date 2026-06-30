@@ -1,6 +1,6 @@
 # BMSSP in Isabelle/HOL — an unconditional, non‑vacuous size‑parametric runtime bound
 
-[![Build (Isabelle)](https://github.com/Arthur742Ramos/bmssp-nonvacuous-runtime/actions/workflows/build.yml/badge.svg)](https://github.com/Arthur742Ramos/bmssp-nonvacuous-runtime/actions/workflows/build.yml)
+[![Build (Isabelle)](https://github.com/Arthur742Ramos/bmssp-nonvacuous-runtime/actions/workflows/build.yml/badge.svg)](https://github.com/Arthur742Ramos/bmssp-nonvacuous-runtime/actions/workflows/build.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21074228.svg)](https://doi.org/10.5281/zenodo.21074228)
 
 > **Reviewing this repo?** Start with **[`REVIEW_GUIDE.md`](REVIEW_GUIDE.md)** — what is
 > proved, exactly where, what is and isn't assumed, and how to verify it in one command.
