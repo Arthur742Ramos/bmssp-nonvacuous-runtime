@@ -1,0 +1,6 @@
+# Isabelle build artifacts
+*.db
+output/
+.isabelle/
+heaps/
+browser_info/
