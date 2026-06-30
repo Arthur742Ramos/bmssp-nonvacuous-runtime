@@ -1,5 +1,7 @@
 # BMSSP in Isabelle/HOL — an unconditional, non‑vacuous size‑parametric runtime bound
 
+[![Build (Isabelle)](https://github.com/Arthur742Ramos/bmssp-nonvacuous-runtime/actions/workflows/build.yml/badge.svg)](https://github.com/Arthur742Ramos/bmssp-nonvacuous-runtime/actions/workflows/build.yml)
+
 A machine‑checked Isabelle/HOL development of **BMSSP** (the *Bounded Multi‑Source
 Shortest Path* recurrence behind recent sub‑sorting‑barrier SSSP work), culminating
 in a **fully unconditional, non‑vacuous, size‑parametric running‑time theorem** for an

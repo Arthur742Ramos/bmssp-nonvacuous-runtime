@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "BMSSP in Isabelle/HOL: an unconditional, non-vacuous size-parametric runtime bound"
+abstract: >-
+  A machine-checked Isabelle/HOL development of the Bounded Multi-Source Shortest Path
+  (BMSSP) recurrence, culminating in an assumption-free, non-vacuous, size-parametric
+  running-time theorem: the charged running time on an unbounded unit-weight directed
+  path family is O(|V| * (ln |V|)^(2/3)) in the genuine graph size, with no hypotheses.
+  The development contains no sorry, oops, or axiomatization and is verified by a clean
+  Isabelle build (proofs and document). The final non-vacuous headline was developed with
+  autonomous proof engineering via the GitHub Copilot CLI (Claude Opus 4.8).
+type: software
+authors:
+  - given-names: "Arthur Freitas"
+    family-names: "Ramos"
+    alias: "Arthur742Ramos"
+repository-code: "https://github.com/Arthur742Ramos/bmssp-nonvacuous-runtime"
+url: "https://github.com/Arthur742Ramos/bmssp-nonvacuous-runtime"
+license: BSD-3-Clause
+version: "1.0.0"
+date-released: "2026-06-29"
+keywords:
+  - "Isabelle/HOL"
+  - "formal verification"
+  - "interactive theorem proving"
+  - "shortest paths"
+  - "BMSSP"
+  - "amortized analysis"
+  - "computational complexity"
+  - "running-time bounds"

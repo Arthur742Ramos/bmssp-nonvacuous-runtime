@@ -1,0 +1,60 @@
+name: Build (Isabelle)
+
+# Verifies the BMSSP_Correctness session compiles with no proof holes.
+# Runs the proofs (document disabled, so no LaTeX is needed in CI).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: isabelle build BMSSP_Correctness
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      ISABELLE_VERSION: Isabelle2025-2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache Isabelle distribution
+        id: cache-dist
+        uses: actions/cache@v4
+        with:
+          path: ~/${{ env.ISABELLE_VERSION }}
+          key: ${{ env.ISABELLE_VERSION }}-linux
+
+      - name: Download Isabelle
+        if: steps.cache-dist.outputs.cache-hit != 'true'
+        run: |
+          cd "$HOME"
+          curl -fSL "https://isabelle.in.tum.de/dist/${ISABELLE_VERSION}_linux.tar.gz" -o isabelle.tar.gz
+          tar -xzf isabelle.tar.gz
+          rm isabelle.tar.gz
+
+      - name: Put Isabelle on PATH
+        run: echo "$HOME/${ISABELLE_VERSION}/bin" >> "$GITHUB_PATH"
+
+      - name: Show Isabelle version
+        run: isabelle version
+
+      - name: Cache Isabelle heaps (HOL-Library, etc.)
+        uses: actions/cache@v4
+        with:
+          path: ~/.isabelle
+          key: isabelle-heaps-${{ env.ISABELLE_VERSION }}-${{ hashFiles('**/*.thy', 'ROOT') }}
+          restore-keys: |
+            isabelle-heaps-${{ env.ISABELLE_VERSION }}-
+
+      - name: Build session (proofs, no document)
+        run: isabelle build -o document=false -D .
