@@ -5,7 +5,7 @@ BMSSP entry.
 
 ## Public Claim Split
 
-The checked development exposes six public surfaces:
+The checked development exposes seven public surfaces:
 
 1. Executable correctness for `bmssp_distances`, stated in
    `BMSSP_Executable_Headline`.
@@ -53,18 +53,31 @@ The checked development exposes six public surfaces:
    step's truncating base case settles only a `k`-bounded prefix of the path,
    no complete run exists on `P_k` for `k >= 2`. This is why the `runs_exist`
    hypothesis of surface (4) cannot be discharged for the path family.
+7. An **unconditional, non-vacuous** size-parametric runtime headline for the
+   *charged* loop on the path family at a *decoupled, inflated* schedule, stated in
+   `BMSSP_NonVacuous_Family` (`path_nonvac_runtime_bigo_card_V_unconditional`):
+   `(\<lambda>n. real (path_nonvac_time n)) \<in> O(\<lambda>n. card V_n * (ln (card V_n))^{2/3})`
+   with **no hypotheses**. Run-existence is proved unconditionally
+   (`eventually_path_nonvac_charged_cost_exists`); the bounded quantity is the least
+   charged cost of a genuine run; and the family is genuinely unbounded
+   (`path_card_V_at_top`). This discharges the charged bridge of surface (4) on a
+   different object (charged relation, schedule `n*n`) from the vacuous coupled-schedule
+   exact-concrete bound of surface (6).
 
 There is no theorem claiming a generated-code machine-step bound for the SML
 export; the one-vertex-per-pull executable is a reference implementation and is
-deliberately not claimed to meet the asymptotic bound.  **Known limitation
-(disclosed, not hidden):** the algorithm-level size-parametric bound (surface 4,
-`bmssp_path_family_runtime_bigo_size`) is vacuous on its own family — its
-`runs_exist` hypothesis is provably unsatisfiable for `P_k`, `k >= 2`. Only the
-unconditional cost-formula floor `path_size_cost_bigo_size` carries genuine
-size-parametric content. Discharging `runs_exist` would require relaxing the
-exact-concrete `Exact_Concrete_State_Step` rule to mirror the more permissive
-operational loop (which leaves the child output set free), a change to the cost
-relation the whole runtime development depends on.
+deliberately not claimed to meet the asymptotic bound.  **Scope note (disclosed,
+not hidden):** the *exact-concrete* algorithm-level size-parametric bound at the
+*coupled* schedule (surface 4, `bmssp_path_family_runtime_bigo_size`) is vacuous on
+its own family — its `runs_exist` hypothesis is provably unsatisfiable for `P_k`,
+`k >= 2` (surface 6) — and that specific theorem is retained only as an honest
+record. A genuine **non-vacuous** algorithm-level size-parametric bound is
+nevertheless available and is the discharged headline: surface 7
+(`path_nonvac_runtime_bigo_card_V_unconditional`) runs the *charged* relation at a
+*decoupled, inflated* schedule, where a complete run provably exists, and is fully
+unconditional. The two are different objects (exact-concrete/coupled vs
+charged/decoupled inflated) and do not conflict; the unconditional cost-formula floor
+`path_size_cost_bigo_size` also remains genuinely true.
 
 ## Assumption Ledger
 

@@ -2,6 +2,9 @@
 
 [![Build (Isabelle)](https://github.com/Arthur742Ramos/bmssp-nonvacuous-runtime/actions/workflows/build.yml/badge.svg)](https://github.com/Arthur742Ramos/bmssp-nonvacuous-runtime/actions/workflows/build.yml)
 
+> **Reviewing this repo?** Start with **[`REVIEW_GUIDE.md`](REVIEW_GUIDE.md)** — what is
+> proved, exactly where, what is and isn't assumed, and how to verify it in one command.
+
 A machine‑checked Isabelle/HOL development of **BMSSP** (the *Bounded Multi‑Source
 Shortest Path* recurrence behind recent sub‑sorting‑barrier SSSP work), culminating
 in a **fully unconditional, non‑vacuous, size‑parametric running‑time theorem** for an
@@ -137,6 +140,7 @@ The unconditional headline is assembled in three milestones inside
 | [`BMSSP_Complexity.thy`](BMSSP_Complexity.thy) | The logarithmic schedule, level caps, and `O(...)` machinery |
 | [`BMSSP_Top_Level_Bounds.thy`](BMSSP_Top_Level_Bounds.thy) | Top‑level cost relations and `source_pivot_finishes` |
 | [`BMSSP_Executable_Headline.thy`](BMSSP_Executable_Headline.thy) | Executable correctness of `bmssp_distances` |
+| [`REVIEW_GUIDE.md`](REVIEW_GUIDE.md) | **Start here if you're reviewing** — claims, locations, hygiene, reproducibility |
 | [`HEADLINE.md`](HEADLINE.md) | All public claims of the entry, precisely stated |
 | [`VERIFICATION.md`](VERIFICATION.md) | Proof‑hygiene audit |
 | [`BMSSP_ENTRY_README.md`](BMSSP_ENTRY_README.md) | Original entry overview |

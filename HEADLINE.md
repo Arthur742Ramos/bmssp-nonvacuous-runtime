@@ -183,7 +183,7 @@ unit-weight directed paths `P_k` on vertices `0..k` with edges `i -> i+1`, so
   *why* no complete run exists (the loop is forced into a genuine step it cannot
   complete).
 - `bmssp_path_family_charged_direct_insert_runtime_bigo_size_if_cost_bounded`
-  (CONDITIONAL, checked, and not yet discharged): the parallel statement for
+  (CONDITIONAL bridge — now **discharged**; see §3c): the parallel statement for
   `charged_direct_insert_top_level_time`.  It replaces the exact-concrete
   `runs_exist` premise with eventual existence of
   `charged_direct_insert_top_level_cost`, but it also honestly assumes the
@@ -212,15 +212,55 @@ relation's over-rigid step rule (the operational loop, which leaves the child
 output free, does not suffer it); closing it changes the cost relation the whole
 runtime development depends on.
 
-Bottom line for this claim: on this branch, only the **unconditional
-cost-formula floor** carries genuine size-parametric content. The exact-concrete
-algorithm-level size-parametric bound is vacuous on its own family and is
-retained here, with this disclosure, as an honest record rather than as
-evidence. The checked charged bridge records exactly what must be supplied next:
-eventual `charged_direct_insert_top_level_cost` existence on `P_k`, the runtime
-closed-bound fact `charged_direct_insert_closed_refined_bound_log_params_fixed_degree
-D N`, and the exported cost theorem
-`charged_direct_insert_top_level_cost_refined_bound_log_params_fixed_degree`.
+Bottom line for this claim. Two facts coexist and must not be conflated:
+**(i)** the *exact-concrete* algorithm-level bound at the *coupled* schedule `N := k`
+(`bmssp_path_family_runtime_bigo_size`) is **vacuous** on `P_k` — its `runs_exist`
+premise is provably unsatisfiable (the obstruction above), and it is retained only as
+an honest record; **(ii)** the *charged* relation at a *decoupled, inflated* schedule
+**does** admit a genuine complete run and yields a fully **unconditional, non-vacuous**
+size-parametric headline — see §3c, which discharges the charged bridge of the bullet
+above. These are different objects (exact-concrete/coupled vs charged/decoupled); the
+obstruction is specific to the exact-concrete relation at the coupled schedule and does
+not touch §3c.
+
+---
+
+## 3c. Claim 2d: Unconditional non-vacuous size-parametric runtime headline (discharged)
+
+**File:** [`BMSSP_NonVacuous_Family.thy`](BMSSP_NonVacuous_Family.thy)
+
+This is the discharged, genuinely non-vacuous size-parametric headline. It runs the
+*charged* direct-insert loop on the path family `P_n` at a **decoupled, inflated**
+schedule index `n * n` — rather than the coupled `N := k` of §3b, where the bucket cap
+is sub-linear in `k` so no run completes. At the inflated schedule the cap covers the
+whole path, so a genuine complete charged run exists.
+
+```isabelle
+theorem path_nonvac_runtime_bigo_card_V_unconditional:
+  "(λn. real (path_nonvac_time n))
+     ∈ O(λn. real (card (path_k_V n))
+            * (ln (real (card (path_k_V n)) + 2)) powr (2/3))"
+```
+
+with `path_nonvac_time n = charged_direct_insert_top_level_time (P_n) 0 1 (n * n)`.
+The bound has **no hypotheses**, and it is non-vacuous in this precise sense:
+
+| Vacuity risk | Closed by (in `BMSSP_NonVacuous_Family.thy`) |
+|---|---|
+| Finite/bounded family | `path_card_V_at_top` — `card (path_k_V n) ⟶ ∞` |
+| No run exists (bound empty) | `eventually_path_nonvac_charged_cost_exists` — a charged top-level run exists eventually, **unconditionally** |
+| Regime secretly `False` | `eventually_inflated_pivot_regime` — `eventually (2 ≤ p(n²) ≤ n ∧ Suc n ≤ cap(n²))` |
+| Bounded quantity a junk default | `path_nonvac_time` is the *least* charged cost; existence makes it a real run's cost |
+
+The two premises of the §3b bridge are discharged as follows.
+- **Run-existence (B1):** recovered via the inflated/dominating-schedule regime; the
+  single-pivot loop-walk obstruction (`split_below d {0} β ⊆ {0}`) is routed around
+  because the cap now covers the path. Result: `eventually_path_nonvac_charged_cost_exists`
+  (no assumptions).
+- **Cost (B2):** because the headline bounds the *least*-cost run, it is discharged by
+  bounding one specific **cheap** charged run
+  (`path_k_charged_cheap_imp_nonvac_time_le_bound`). The universal `closed_bound` over
+  *all* runs is in fact false on this family and is deliberately **not** used.
 
 ---
 
